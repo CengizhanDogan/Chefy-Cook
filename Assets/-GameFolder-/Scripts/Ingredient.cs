@@ -10,6 +10,6 @@ public class Ingredient : MonoBehaviour, ICollectable
     {
         if (collected) return;
 
-        collector.IngredientManager.CollectIngredient(this);
+        IngredientManager.Instance.CollectIngredient(this);
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IngredientManager : MonoBehaviour
+public class IngredientManager : Singleton<IngredientManager>
 {
     [SerializeField] private Transform originTransform;
     [SerializeField] private Vector3 offset;
@@ -16,19 +16,14 @@ public class IngredientManager : MonoBehaviour
 
     void Start()
     {
-        GetCollector();
+        AddCollector();
         ingredientPositions = new IngredientPositions(originTransform, offset, collectableCount);
     }
 
-    private void GetCollector()
+    private void AddCollector()
     {
-        Collector collector;
-        if (TryGetComponent(out Collector c))
-            collector = c;
-        else
-            collector = gameObject.AddComponent<Collector>();
-
-        collector.SetManager(this);
+        if (!TryGetComponent(out Collector c))
+            gameObject.AddComponent<Collector>();
     }
 
     public void CollectIngredient(Ingredient ingredient)

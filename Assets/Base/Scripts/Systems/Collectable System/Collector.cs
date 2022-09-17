@@ -5,13 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(IngredientManager))]
 public class Collector : MonoBehaviour
 {
-    public IngredientManager IngredientManager { get; private set; }
-
-    public void SetManager(IngredientManager ingredientManager)
-    {
-        this.IngredientManager = ingredientManager;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         ICollectable collectable = other.GetComponentInChildren<ICollectable>();
