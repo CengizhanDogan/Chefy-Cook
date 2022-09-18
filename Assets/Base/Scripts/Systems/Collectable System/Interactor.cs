@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(IngredientManager))]
-public class Collector : MonoBehaviour
+public class Interactor : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        ICollectable collectable = other.GetComponentInChildren<ICollectable>();
+        IInteractable collectable = other.GetComponentInChildren<IInteractable>();
         if (collectable != null)
         {
-            collectable.GetCollected(this);
+            collectable.Interact(this);
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        ICollectable collectable = collision.collider.GetComponentInChildren<ICollectable>();
+        IInteractable collectable = collision.collider.GetComponentInChildren<IInteractable>();
         if (collectable != null)
         {
-            collectable.GetCollected(this);
+            collectable.Interact(this);
         }
     }
 }
