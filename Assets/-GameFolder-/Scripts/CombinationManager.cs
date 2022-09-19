@@ -13,6 +13,8 @@ public class CombinationManager : MonoBehaviour, IInteractable
     private WaitForSeconds loop;
 
     private List<Combination> combinations = new List<Combination>();
+
+
     void Start()
     {
         ingredientManager = IngredientManager.Instance;
@@ -28,12 +30,21 @@ public class CombinationManager : MonoBehaviour, IInteractable
         StartCoroutine(Combinate(myIngredients, ingredientManager.HighestValue));
     }
 
+    public void Exit()
+    {
+        StopAllCoroutines();
+        foreach (var item in ingredientManager.Ingredients)
+        {
+            StartCoroutine(item.ResetPos());
+        }
+    }
+
     private IEnumerator Combinate(List<Ingredient> ingredients, int highestValue)
     {
         while (ingredients.Count > 0)
         {
             foreach (var ingredient in ingredients)
-            {
+            {                
                 if (ingredient.IngredientValue == highestValue && ingredient.cookingType == cookingType)
                 {
                     bool gotIng = false;
@@ -58,7 +69,6 @@ public class CombinationManager : MonoBehaviour, IInteractable
                     if (combination.Count <= 1)
                     {
                         StartCoroutine(SendAll(ingredientManager.Ingredients));
-                        StopCoroutine(Combinate(ingredients, highestValue));
                         yield break;
                     }
                     else
@@ -101,8 +111,10 @@ public class CombinationManager : MonoBehaviour, IInteractable
 [Serializable]
 public class Combination
 {
-    public List<Ingredient> combinedIng = new List<Ingredient>();
+    private List<Ingredient> combinedIng = new List<Ingredient>();
     public int Count { get { return combinedIng.Count; } }
+
+    public int CombinationID { get; private set; }
 
     public void Add(Ingredient ing)
     {
@@ -114,6 +126,7 @@ public class Combination
         foreach (Ingredient ing in combination)
         {
             Add(ing);
+            CombinationID += ing.ID;
         }
     }
 

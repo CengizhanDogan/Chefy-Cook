@@ -22,4 +22,12 @@ public class Interactor : MonoBehaviour
             collectable.Interact(this);
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent(out CombinationManager cm))
+        {
+            cm.Exit();
+        }
+    }
 }

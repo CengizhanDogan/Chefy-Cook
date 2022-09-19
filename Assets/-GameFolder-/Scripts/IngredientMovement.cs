@@ -14,13 +14,11 @@ public class IngredientMovement : MonoBehaviour
             combination[i].transform.DOMove(target.position, 0.5f);
         }
 
-        EventManager.OnCombination.Invoke();
+        EventManager.OnCombination.Invoke(combination);
     }
 
     public void MoveIngredient(Ingredient ingredient)
     {
         ingredient.transform.DOMove(target.position, 0.5f);
-
-        EventManager.OnCombination.Invoke();
     }
 }

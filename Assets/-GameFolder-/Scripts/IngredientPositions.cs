@@ -33,7 +33,7 @@ public class IngredientPositions
         AddNewPosition(positions.Count);
     }
 
-    public void AddNewPosition(int order)
+    private void AddNewPosition(int order)
     {
         Vector3 position = origin.position + (offset * order);
 

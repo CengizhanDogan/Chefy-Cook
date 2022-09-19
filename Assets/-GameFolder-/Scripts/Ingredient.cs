@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using System;
 
 public class Ingredient : MonoBehaviour, IInteractable
 {
+    public int ID;
+
     private IngredientManager ingredientManager;
 
     IngredientPositions ingredientPositions;
-    public int MyIndex;
+    public int MyIndex { get; private set; }
 
     private bool setting;
 
@@ -19,6 +20,8 @@ public class Ingredient : MonoBehaviour, IInteractable
     public bool collected;
 
     public CookingType cookingType;
+
+    public Transform carryTransform;
 
     private void Start()
     {
@@ -32,6 +35,7 @@ public class Ingredient : MonoBehaviour, IInteractable
         ingredientPositions = ingredientManager.IngredientPositions;
         MyIndex = ingredientManager.Ingredients.IndexOf(this);
     }
+
     private void Update()
     {
         SetNewPos();
@@ -56,8 +60,20 @@ public class Ingredient : MonoBehaviour, IInteractable
                         setting = false;
                     });
 
+                    carryTransform = ingredientPositions[MyIndex - 1].transform;
+
                     MyIndex--;
                 }
             }
+    }
+
+    public IEnumerator ResetPos()
+    {
+        while (Vector3.Distance(transform.position, carryTransform.position) > 0.01f)
+        {
+            Debug.Log("Reset");
+            transform.position = Vector3.Lerp(transform.position, carryTransform.position, 10f * Time.deltaTime);
+            yield return null;
+        }
     }
 }

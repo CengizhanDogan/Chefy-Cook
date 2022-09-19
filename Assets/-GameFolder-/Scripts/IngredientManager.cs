@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class IngredientManager : Singleton<IngredientManager>
 {
+    private int chefLevel;
     [SerializeField] private Transform originTransform;
     [SerializeField] private Vector3 offset;
     [SerializeField] private int collectableCount;
@@ -30,7 +32,8 @@ public class IngredientManager : Singleton<IngredientManager>
 
     public void CollectIngredient(Ingredient ingredient)
     {
-        if (ingredients.Count == IngredientPositions.Count) return;
+        if (ingredients.Count == IngredientPositions.Count
+            && ingredient.IngredientValue <= chefLevel) return;
 
         if (ingredient.IngredientValue > highestValue) highestValue = ingredient.IngredientValue;
 
@@ -38,9 +41,10 @@ public class IngredientManager : Singleton<IngredientManager>
 
         Transform ingredientTransform = IngredientPositions[ingredients.Count].transform;
 
+        ingredient.carryTransform = ingredientTransform;
         IngredientPositions[ingredients.Count].full = true;
 
-        ingredient.transform.position = ingredientTransform.position;
+        StartCoroutine(Collection(ingredient, ingredientTransform));
         ingredient.transform.SetParent(ingredientTransform);
 
         ingredient.transform.localEulerAngles = Vector3.zero;
@@ -48,5 +52,22 @@ public class IngredientManager : Singleton<IngredientManager>
         ingredients.Add(ingredient);
     }
 
+    IEnumerator Collection(Ingredient ing, Transform transform)
+    {
+        while (Vector3.Distance(ing.transform.position, transform.position) > 0.01f)
+        {
+            ing.transform.position = Vector3.Lerp(ing.transform.position, transform.position, 10f * Time.deltaTime);
+            yield return null;
+        }
+    }
 
+    public void UpgradeCollection()
+    {
+        IngredientPositions.AddNewPosition();
+    }
+
+    public void UpgradeChef()
+    {
+        chefLevel++;
+    }
 }
