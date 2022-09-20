@@ -11,14 +11,22 @@ public class IngredientMovement : MonoBehaviour
     {
         for (int i = 0; i < combination.Count; i++)
         {
-            combination[i].transform.DOMove(target.position, 0.5f);
+            combination[i].SetRigidColl(true);
+            Transform moveTransform = combination[i].transform;
+            combination[0].StopAllCoroutines();
+            Destroy(combination[i]);
+            moveTransform.DOMove(target.position, 0.5f);
         }
 
-        EventManager.OnCombination.Invoke(combination);
+        EventManager.OnCombination.Invoke(combination, target);
     }
 
     public void MoveIngredient(Ingredient ingredient)
     {
-        ingredient.transform.DOMove(target.position, 0.5f);
+        ingredient.SetRigidColl(true);
+        Transform moveTransform = ingredient.transform;
+        ingredient.StopAllCoroutines();
+        Destroy(ingredient);
+        moveTransform.DOMove(target.position, 0.5f);
     }
 }

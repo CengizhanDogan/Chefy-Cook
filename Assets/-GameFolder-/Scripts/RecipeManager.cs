@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class RecipeManager : MonoBehaviour
 {
-    [SerializeField] private Transform spawnTransform;
+    //[SerializeField] private Transform spawnTransform;
 
     [SerializeField] private List<Recipe> recipes = new List<Recipe>();
 
@@ -18,7 +18,7 @@ public class RecipeManager : MonoBehaviour
         EventManager.OnCombination.RemoveListener(SpawnMeal);
     }
 
-    private void SpawnMeal(Combination combination)
+    private void SpawnMeal(Combination combination, Transform spawnTransform)
     {
         foreach (var recipe in recipes)
         {

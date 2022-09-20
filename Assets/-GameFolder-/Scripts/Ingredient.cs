@@ -9,10 +9,13 @@ public class Ingredient : MonoBehaviour, IInteractable
 
     private IngredientManager ingredientManager;
 
-    IngredientPositions ingredientPositions;
-    public int MyIndex { get; private set; }
+    private IngredientPositions ingredientPositions;
 
-    private bool setting;
+    private Rigidbody rb;
+    private Rigidbody Rb => rb == null ? rb = GetComponentInParent<Rigidbody>() : rb;
+    private Collider coll;
+    private Collider Coll => coll == null ? coll = GetComponentInParent<Collider>() : coll;
+    public int MyIndex { get; private set; }
 
     [SerializeField] private int ingredientValue;
     public int IngredientValue { get { return ingredientValue; } }
@@ -43,37 +46,36 @@ public class Ingredient : MonoBehaviour, IInteractable
 
     private void SetNewPos()
     {
-        if (!setting)
+        if (ingredientManager.Ingredients.Contains(this))
+        {
+            if (MyIndex == 0) return;
 
-            if (ingredientManager.Ingredients.Contains(this))
+            if (!ingredientPositions[MyIndex - 1].full)
             {
-                if (MyIndex == 0) return;
+                ingredientPositions[MyIndex].full = false;
+                ingredientPositions[MyIndex - 1].full = true;
 
-                if (!ingredientPositions[MyIndex - 1].full)
-                {
-                    setting = true;
-                    ingredientPositions[MyIndex].full = false;
-                    ingredientPositions[MyIndex - 1].full = true;
+                carryTransform = ingredientPositions[MyIndex - 1].transform;
 
-                    transform.DOMove(ingredientPositions[MyIndex - 1].transform.position, 0.25f).SetEase(Ease.Linear).OnComplete(() =>
-                    {
-                        setting = false;
-                    });
-
-                    carryTransform = ingredientPositions[MyIndex - 1].transform;
-
-                    MyIndex--;
-                }
+                MyIndex--;
             }
+        }
     }
 
     public IEnumerator ResetPos()
     {
+        SetRigidColl(true);
         while (Vector3.Distance(transform.position, carryTransform.position) > 0.01f)
         {
-            Debug.Log("Reset");
             transform.position = Vector3.Lerp(transform.position, carryTransform.position, 10f * Time.deltaTime);
             yield return null;
         }
+        SetRigidColl(false);
+    }
+
+    public void SetRigidColl(bool set)
+    {
+        Rb.isKinematic = set;
+        Coll.isTrigger = set;
     }
 }

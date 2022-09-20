@@ -35,7 +35,7 @@ public class CombinationManager : MonoBehaviour, IInteractable
         StopAllCoroutines();
         foreach (var item in ingredientManager.Ingredients)
         {
-            StartCoroutine(item.ResetPos());
+            item.StartCoroutine(item.ResetPos());
         }
     }
 
@@ -44,7 +44,7 @@ public class CombinationManager : MonoBehaviour, IInteractable
         while (ingredients.Count > 0)
         {
             foreach (var ingredient in ingredients)
-            {                
+            {
                 if (ingredient.IngredientValue == highestValue && ingredient.cookingType == cookingType)
                 {
                     bool gotIng = false;
@@ -57,7 +57,7 @@ public class CombinationManager : MonoBehaviour, IInteractable
                         gotIng = false;
                         foreach (var secondIng in ingredients)
                         {
-                            if (ingredientManager.Ingredients.Contains(secondIng) && ingredient.cookingType == cookingType)
+                            if (ingredientManager.Ingredients.Contains(secondIng) && secondIng.cookingType == cookingType)
                                 if (!gotIng && secondIng.IngredientValue == i)
                                 {
                                     combination.Add(secondIng);
@@ -95,6 +95,8 @@ public class CombinationManager : MonoBehaviour, IInteractable
 
         foreach (var ingredient in myIngredients)
         {
+            if (ingredient.cookingType != cookingType) continue;
+
             ingredientMovement.MoveIngredient(ingredient);
             RemoveFromList(ingredient);
             yield return loop;

@@ -13,4 +13,4 @@ public static class EventManager
 	#endregion
 }
 public class GemCollectEvent : UnityEvent<Vector3, Action> { }
-public class CombinationEvent : UnityEvent<Combination> { }
+public class CombinationEvent : UnityEvent<Combination, Transform> { }

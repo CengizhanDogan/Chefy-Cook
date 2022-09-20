@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class IngredientManager : Singleton<IngredientManager>
 {
-    private int chefLevel;
+    [SerializeField] private int chefLevel;
     [SerializeField] private Transform originTransform;
     [SerializeField] private Vector3 offset;
     [SerializeField] private int collectableCount;
@@ -33,7 +33,7 @@ public class IngredientManager : Singleton<IngredientManager>
     public void CollectIngredient(Ingredient ingredient)
     {
         if (ingredients.Count == IngredientPositions.Count
-            && ingredient.IngredientValue <= chefLevel) return;
+            || ingredient.IngredientValue > chefLevel) return;
 
         if (ingredient.IngredientValue > highestValue) highestValue = ingredient.IngredientValue;
 
@@ -59,6 +59,9 @@ public class IngredientManager : Singleton<IngredientManager>
             ing.transform.position = Vector3.Lerp(ing.transform.position, transform.position, 10f * Time.deltaTime);
             yield return null;
         }
+
+        ing.gameObject.layer = LayerMask.NameToLayer("Food");
+        ing.SetRigidColl(false);
     }
 
     public void UpgradeCollection()
