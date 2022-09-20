@@ -5,8 +5,6 @@ using DG.Tweening;
 
 public class RecipeManager : MonoBehaviour
 {
-    //[SerializeField] private Transform spawnTransform;
-
     [SerializeField] private List<Recipe> recipes = new List<Recipe>();
 
     private void OnEnable()
@@ -18,11 +16,11 @@ public class RecipeManager : MonoBehaviour
         EventManager.OnCombination.RemoveListener(SpawnMeal);
     }
 
-    private void SpawnMeal(Combination combination, Transform spawnTransform)
+    private void SpawnMeal(int recipeID, Transform spawnTransform)
     {
         foreach (var recipe in recipes)
         {
-            if (recipe.ID == combination.CombinationID)
+            if (recipe.ID == recipeID)
             {
                 SendToTable(Instantiate(recipe, spawnTransform.position, Quaternion.identity, transform));
             }
@@ -31,6 +29,11 @@ public class RecipeManager : MonoBehaviour
 
     private void SendToTable(Recipe recipe)
     {
+        Transform meal = recipe.transform;
+        Vector3 scale = meal.localScale;
+        meal.transform.localScale = Vector3.zero;
+        meal.DOScale(scale, 0.25f).SetEase(Ease.OutBack);
+
         // ...
     }
 }

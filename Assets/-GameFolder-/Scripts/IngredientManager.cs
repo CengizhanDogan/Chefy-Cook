@@ -39,12 +39,24 @@ public class IngredientManager : Singleton<IngredientManager>
 
         ingredient.collected = true;
 
-        Transform ingredientTransform = IngredientPositions[ingredients.Count].transform;
+        EventManager.OnCollection.Invoke(ingredient.ID);
 
-        ingredient.carryTransform = ingredientTransform;
+        Transform ingredientTransform = IngredientPositions[ingredients.Count].transform;
+        Transform followTransform;
+
+        if (ingredients.Count > 0)
+        {
+            followTransform = ingredients[ingredients.Count - 1].topTransform;
+        }
+        else
+        {
+            followTransform = IngredientPositions[ingredients.Count].transform;
+        }
+
+        ingredient.carryTransform = followTransform;
         IngredientPositions[ingredients.Count].full = true;
 
-        StartCoroutine(Collection(ingredient, ingredientTransform));
+        StartCoroutine(Collection(ingredient, followTransform));
         ingredient.transform.SetParent(ingredientTransform);
 
         ingredient.transform.localEulerAngles = Vector3.zero;

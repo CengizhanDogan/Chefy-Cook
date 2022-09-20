@@ -33,10 +33,6 @@ public class CombinationManager : MonoBehaviour, IInteractable
     public void Exit()
     {
         StopAllCoroutines();
-        foreach (var item in ingredientManager.Ingredients)
-        {
-            item.StartCoroutine(item.ResetPos());
-        }
     }
 
     private IEnumerator Combinate(List<Ingredient> ingredients, int highestValue)
@@ -52,7 +48,7 @@ public class CombinationManager : MonoBehaviour, IInteractable
 
                     combination.Add(ingredient);
 
-                    for (int i = highestValue - 1; i >= 0; i--)
+                    for (int i = highestValue - 1; i >= -1; i--)
                     {
                         gotIng = false;
                         foreach (var secondIng in ingredients)
@@ -97,7 +93,7 @@ public class CombinationManager : MonoBehaviour, IInteractable
         {
             if (ingredient.cookingType != cookingType) continue;
 
-            ingredientMovement.MoveIngredient(ingredient);
+            ingredientMovement.MoveIngredient(ingredient, false);
             RemoveFromList(ingredient);
             yield return loop;
         }
