@@ -41,9 +41,9 @@ public class Order : MonoBehaviour
 
     private void CloseOrder()
     {
-        orderPanel.currentOrders.Remove(this);
-        transform.DOScale(Vector3.zero, 0.5f).OnComplete(() =>
+        transform.DOScale(Vector3.zero, 0.1f).OnComplete(() =>
         {
+            orderPanel.currentOrders.Remove(this);
             Destroy(gameObject);
             orderPanel.CreateOrder();
         });
