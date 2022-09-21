@@ -10,8 +10,27 @@ public class OrderPanel : Singleton<OrderPanel>
 
     private List<Order> orders = new List<Order>();
 
-    private List<Order> currentOrders = new List<Order>();
+    public List<Order> currentOrders = new List<Order>();
 
+    private void OnEnable()
+    {
+        LevelManager.Instance.OnLevelFinish.AddListener(ResetPanel);
+    }
+
+    private void OnDisable()
+    {
+        LevelManager.Instance.OnLevelFinish.RemoveListener(ResetPanel);
+    }
+
+    private void ResetPanel()
+    {
+        foreach (var order in currentOrders)
+        {
+            Destroy(order.gameObject);
+        }
+
+        currentOrders.Clear();
+    }
     public void SetList(List<Order> orders)
     {
         foreach (var order in orders)

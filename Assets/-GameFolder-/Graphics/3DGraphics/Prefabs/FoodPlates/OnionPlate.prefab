@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 105
+  value: 5
 --- !u!1 &5416785880327136248
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,13 +13,11 @@ public class ButtonManager : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.OnGemCollected.AddListener(CheckPrice);
-        EventManager.OnGemSpend.AddListener(CheckPrice);
+        EventManager.OnGemChange.AddListener(CheckPrice);
     }
     private void OnDisable()
     {
-        EventManager.OnGemCollected.RemoveListener(CheckPrice);
-        EventManager.OnGemSpend.RemoveListener(CheckPrice);
+        EventManager.OnGemChange.RemoveListener(CheckPrice);
     }
     public void SetBasePrice(int basePrice)
     {
@@ -30,8 +28,10 @@ public class ButtonManager : MonoBehaviour
     {
         EventManager.OnGemSpend.Invoke(buttonPrice);
         buttonPrice += basePrice;
+
+        text.text = buttonPrice.ToString();
     }
-    public void CheckPrice(int a)
+    public void CheckPrice()
     {
         if (PlayerPrefs.GetInt(PlayerPrefKeys.Coin) < buttonPrice)
         {
@@ -43,9 +43,5 @@ public class ButtonManager : MonoBehaviour
         }
 
         text.text = buttonPrice.ToString();
-    }
-    private void CheckPrice(Vector3 a, Action b)
-    {
-        CheckPrice(0);
     }
 }

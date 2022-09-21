@@ -16,10 +16,12 @@ public class UpgradeManager : Singleton<UpgradeManager>
     private void OnEnable()
     {
         LevelManager.Instance.OnLevelStart.AddListener(SetButtons);
+        EventManager.OnGemChange.AddListener(Debugger);
     }
     private void OnDisable()
     {
         LevelManager.Instance.OnLevelStart.RemoveListener(SetButtons);
+        EventManager.OnGemChange.RemoveListener(Debugger);
     }
     private void SetButtons()
     {
@@ -37,12 +39,20 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
         foreach (ButtonManager button in buttons)
         {
-            button.CheckPrice(0);
+            button.CheckPrice();
             button.button.onClick.AddListener(button.SpendMoney);
         }
     }
     public void SetButtons(bool set)
     {
         enabler.SetActive(set);
+    }
+
+    private void Debugger()
+    {
+        foreach (ButtonManager button in buttons)
+        {
+            button.CheckPrice();
+        }
     }
 }

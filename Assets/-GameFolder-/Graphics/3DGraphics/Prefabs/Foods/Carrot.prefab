@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 102
   topTransform: {fileID: 0}
-  ingredientValue: 0
+  ingredientValue: 1
   listOrder: 0
   collected: 0
   cookingType: 1

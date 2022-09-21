@@ -103,7 +103,7 @@ public class CombinationManager : MonoBehaviour, IInteractable, IExitable
     {
         ingredientManager.Ingredients.Remove(ingredient);
         ingredientManager.IngredientPositions[ingredient.MyIndex].full = false;
-        ingredient.transform.SetParent(transform);
+        ingredient.transform.SetParent(null);
     }
 }
 [Serializable]
