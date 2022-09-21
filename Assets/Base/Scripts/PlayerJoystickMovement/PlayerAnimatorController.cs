@@ -20,7 +20,7 @@ public class PlayerAnimatorController : MonoBehaviour
 	[ReadOnly] public float walkSpeed;
 	void Update()
 	{
-		//SetWalkAnimations();
+		SetWalkAnimations();
 	}
 
 	private void SetWalkAnimations()

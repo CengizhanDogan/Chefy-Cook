@@ -24,5 +24,4 @@ public class IngredientPanel : MonoBehaviour
             transform.DOLocalMoveY(0, 0.5f);
         }
     }
-
 }

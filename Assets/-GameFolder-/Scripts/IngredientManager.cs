@@ -18,6 +18,8 @@ public class IngredientManager : Singleton<IngredientManager>
     private int highestValue;
     public int HighestValue { get { return highestValue; } }
 
+    public int incomeMult;
+
     void Start()
     {
         AddCollector();
@@ -84,5 +86,10 @@ public class IngredientManager : Singleton<IngredientManager>
     public void UpgradeChef()
     {
         chefLevel++;
+    }
+
+    public void UpgradeIncome()
+    {
+        incomeMult++;
     }
 }

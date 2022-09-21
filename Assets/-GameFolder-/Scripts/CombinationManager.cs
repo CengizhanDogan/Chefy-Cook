@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CombinationManager : MonoBehaviour, IInteractable
+public class CombinationManager : MonoBehaviour, IInteractable, IExitable
 {
     [SerializeField] private CookingType cookingType;
 

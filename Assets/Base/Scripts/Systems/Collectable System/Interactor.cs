@@ -25,9 +25,10 @@ public class Interactor : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out CombinationManager cm))
+        IExitable exitable = other.GetComponentInChildren<IExitable>();
+        if (exitable != null)
         {
-            cm.Exit();
+            exitable.Exit();
         }
     }
 }
