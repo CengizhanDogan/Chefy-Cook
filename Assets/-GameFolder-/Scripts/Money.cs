@@ -7,5 +7,6 @@ public class Money : MonoBehaviour, IInteractable
     public void Interact(Interactor interactor)
     {
         EventManager.OnGemCollected.Invoke(transform.position, () => { });
+        PoolingSystem.Instance.DestroyAPS(gameObject);
     }
 }

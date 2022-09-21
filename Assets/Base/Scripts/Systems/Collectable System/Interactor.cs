@@ -14,14 +14,14 @@ public class Interactor : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        IInteractable collectable = collision.collider.GetComponentInChildren<IInteractable>();
-        if (collectable != null)
-        {
-            collectable.Interact(this);
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    IInteractable collectable = collision.collider.GetComponentInChildren<IInteractable>();
+    //    if (collectable != null)
+    //    {
+    //        collectable.Interact(this);
+    //    }
+    //}
 
     private void OnTriggerExit(Collider other)
     {
@@ -31,4 +31,12 @@ public class Interactor : MonoBehaviour
             exitable.Exit();
         }
     }
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    IExitable exitable = collision.collider.GetComponentInChildren<IExitable>();
+    //    if (exitable != null)
+    //    {
+    //        exitable.Exit();
+    //    }
+    //}
 }

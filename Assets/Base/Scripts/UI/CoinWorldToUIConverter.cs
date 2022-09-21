@@ -29,7 +29,7 @@ public class CoinWorldToUIConverter : MonoBehaviour
         .OnComplete(() =>
         {
             PoolingSystem.Instance.DestroyAPS(gemImageGo);
-            PlayerPrefs.SetInt(PlayerPrefKeys.Coin, PlayerPrefs.GetInt(PlayerPrefKeys.Coin) + 1);
+            PlayerPrefs.SetInt(PlayerPrefKeys.Coin, PlayerPrefs.GetInt(PlayerPrefKeys.Coin) + 5);
             foreach (var item in FindObjectOfType<LevelPanel>().inGameCoinTexts)
             {
                 item.text = PlayerPrefs.GetInt(PlayerPrefKeys.Coin).ToString();
@@ -40,6 +40,8 @@ public class CoinWorldToUIConverter : MonoBehaviour
         {
             PoolingSystem.Instance.DestroyAPS(gemImageGo);
         });
+
+        EventManager.OnGemChange.Invoke();
     }
 
     private void OnGemSpend(int spendValue)
@@ -49,6 +51,8 @@ public class CoinWorldToUIConverter : MonoBehaviour
         {
             item.text = PlayerPrefs.GetInt(PlayerPrefKeys.Coin).ToString();
         }
+
+        EventManager.OnGemChange.Invoke();
     }
     private Vector3 WorldToUISpace(Canvas canvas, Vector3 worldPosition)
     {

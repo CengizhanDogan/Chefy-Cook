@@ -34,6 +34,6 @@ public class RecipeManager : MonoBehaviour
         meal.transform.localScale = Vector3.zero;
         meal.DOScale(scale, 0.25f).SetEase(Ease.OutBack);
 
-        // ...
+        DeliverManager.Instance.DeliverOrder(recipe);
     }
 }

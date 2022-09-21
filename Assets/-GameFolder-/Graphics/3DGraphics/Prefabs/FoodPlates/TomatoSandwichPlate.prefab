@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 225
+  value: 10
 --- !u!1 &6392220264688665054
 GameObject:
   m_ObjectHideFlags: 0

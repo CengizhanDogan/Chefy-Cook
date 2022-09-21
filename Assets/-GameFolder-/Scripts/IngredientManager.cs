@@ -8,6 +8,7 @@ public class IngredientManager : Singleton<IngredientManager>
 {
     [SerializeField] private int chefLevel;
     [SerializeField] private Transform originTransform;
+    [SerializeField] private Transform followTransform;
     [SerializeField] private Vector3 offset;
     [SerializeField] private int collectableCount;
 
@@ -23,7 +24,13 @@ public class IngredientManager : Singleton<IngredientManager>
     void Start()
     {
         AddCollector();
-        IngredientPositions = new IngredientPositions(originTransform, offset, collectableCount);
+        IngredientPositions = new IngredientPositions(followTransform, offset, collectableCount);
+    }
+
+    private void Update()
+    {
+        followTransform.position = originTransform.position;
+        followTransform.rotation = originTransform.rotation;
     }
 
     private void AddCollector()
