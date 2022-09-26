@@ -41,9 +41,13 @@ public class IngredientManager : Singleton<IngredientManager>
 
     public void CollectIngredient(Ingredient ingredient)
     {
-        if (ingredients.Count == IngredientPositions.Count
-            || ingredient.IngredientValue > chefLevel) return;
+        if (ingredients.Count == IngredientPositions.Count) return;
 
+        if (ingredient.IngredientValue > chefLevel)
+        {
+            ingredient.StartText();
+            return;
+        }
         if (ingredient.IngredientValue > highestValue) highestValue = ingredient.IngredientValue;
 
         ingredient.collected = true;

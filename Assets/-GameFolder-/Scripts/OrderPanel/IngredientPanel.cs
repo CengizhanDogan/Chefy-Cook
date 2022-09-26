@@ -35,7 +35,6 @@ public class IngredientPanel : MonoBehaviour
 
         if (!ingredientManager.Ingredients.Any(i => i.ID == panelID))
         {
-            Debug.Log("Reset");
             rectTransform.DOLocalMove(startPos, 0.5f);
             resetPos = true;
         }

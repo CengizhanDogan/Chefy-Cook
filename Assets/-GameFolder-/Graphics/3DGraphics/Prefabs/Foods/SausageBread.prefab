@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -8154430187806868926}
   - component: {fileID: 7576347748296004846}
   - component: {fileID: 5674658036410703908}
+  - component: {fileID: -3393782760969404660}
   m_Layer: 0
   m_Name: SausageBread
   m_TagString: Untagged
@@ -132,3 +133,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-3393782760969404660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6179100433273635313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96dd2686388dc314389e25e935b85ac4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPreFab: {fileID: 3358772464332966350, guid: b9212c5372d5f734cb7df8e06a220d4e, type: 3}

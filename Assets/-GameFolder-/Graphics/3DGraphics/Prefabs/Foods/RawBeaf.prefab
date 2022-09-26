@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2455975646151168179}
   - component: {fileID: 4942978916288809308}
   - component: {fileID: 7168616162881912214}
+  - component: {fileID: 191277123668523645}
   m_Layer: 0
   m_Name: RawBeaf
   m_TagString: Untagged
@@ -133,3 +134,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &191277123668523645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8682084779519941699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96dd2686388dc314389e25e935b85ac4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPreFab: {fileID: 3358772464332966350, guid: b9212c5372d5f734cb7df8e06a220d4e, type: 3}

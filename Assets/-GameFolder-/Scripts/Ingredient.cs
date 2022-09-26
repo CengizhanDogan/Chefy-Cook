@@ -9,8 +9,8 @@ public class Ingredient : MonoBehaviour, IInteractable
     public int ID;
 
     private IngredientManager ingredientManager;
-
     private IngredientPositions ingredientPositions;
+    private UpgradeText upgradeText;
 
     public Transform topTransform;
 
@@ -33,7 +33,7 @@ public class Ingredient : MonoBehaviour, IInteractable
     private void Start()
     {
         CreateTopPos();
-
+        upgradeText= GetComponent<UpgradeText>();
         ingredientManager = IngredientManager.Instance;
     }
 
@@ -56,6 +56,10 @@ public class Ingredient : MonoBehaviour, IInteractable
         MyIndex = ingredientManager.Ingredients.IndexOf(this);
     }
 
+    public void StartText()
+    {
+        upgradeText.SpawnText();
+    }
     private void Update()
     {
         SetNewPos();
